@@ -52,7 +52,7 @@
 		}
 
 		// clear selected
-		setTimeout(() => (selected = []), 300)
+		setTimeout(() => (selected = []), 1000)
 	}
 
 	function pauseGame(e: KeyboardEvent) {
@@ -126,12 +126,14 @@
 			{@const isSelectedOrMatch =
 				selected.includes(cardIndex) || matches.includes(card)}
 			{@const match = matches.includes(card)}
+			{@const isSelectedOrMatchOrMaxSelectionReached = 
+				selected.length == 2 ||	selected.includes(cardIndex) || matches.includes(card)}
 
 			<button
 				class="card"
 				class:selected={isSelected}
 				class:flip={isSelectedOrMatch}
-				disabled={isSelectedOrMatch}
+				disabled={isSelectedOrMatchOrMaxSelectionReached}
 				on:click={() => selectCard(cardIndex)}
 			>
 				<div class="back" class:match>
